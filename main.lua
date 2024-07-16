@@ -1,31 +1,35 @@
 function _init()
     particles = {}
-    force = -3
-    forced = 1
+    force = 0
+    forceDirection = 0.02
+end
+
+function moveFire()
+    if force < -0.5 or force > rnd(0.5) then
+        forceDirection = forceDirection * -1
+    end
+    force += forceDirection
 end
 
 function _update60()
-    force += 0.1 * forced
-    if force > 3 or force < -3 then
-        forced = forced * -1
-    end
+    moveFire()
 
-    for i = 1, 20 do
+    for i = 1, 5 do
         add(particles, {
-            x = 40 + rnd(20),
-            y = 90 + rnd(10),
+            x = 61 + rnd(6),
+            y = 60 + rnd(6),
             radius = rnd(3),
             colour = 10,
-            life = 10,
+            life = rnd(35),
             speed = 1 + rnd(2)
        })
     end
 
     for particle in all(particles) do
-        particle.y -= particle.speed
-        particle.life -= 1
-        particle.radius -= 0.1
+        particle.y -= 1
         particle.x += force
+        particle.radius -= 0.1
+        particle.life -= 1
 
         if particle.life < 5 then
             particle.colour = 9
