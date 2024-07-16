@@ -16,7 +16,7 @@ function _update60()
 
     for i = 1, 5 do
         add(particles, {
-            x = 61 + rnd(6),
+            x = 61 + rnd(3),
             y = 60 + rnd(6),
             radius = rnd(3),
             colour = 10,
