@@ -5,20 +5,24 @@ function _init()
 end
 
 function _update60()
-    for i = 1, 10 do
+    for i = 1, 20 do
         add(particles, {
             x = 40 + rnd(20),
-            y = 80 + rnd(20),
+            y = 90 + rnd(10),
             radius = rnd(3),
-            colour = 11,
-            life = 5,
+            colour = 10,
+            life = 10,
             speed = 1 + rnd(2)
        })
     end
 
     for particle in all(particles) do
-       particle.y -= particle.speed
-       particle.life -= 1
+        particle.y -= particle.speed
+        particle.life -= 1
+
+        if particle.life < 5 then
+            particle.colour = 9
+        end
 
         if particle.life < 0 then
             del(particles, particle)
