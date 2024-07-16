@@ -4,16 +4,18 @@ function _init()
     for i = 1, 10 do
         add(particles, {
             x = 40 + rnd(20),
-            y = 40 + rnd(20),
-            radius = 1,
+            y = 80 + rnd(20),
+            radius = rnd(3),
             colour = 11,
-            speed = 1
+            speed = rnd(2)
        })
     end
 end
 
 function _update60()
-   
+    for particle in all(particles) do
+       particle.y -= particle.speed
+    end
 end
 
 function _draw()
