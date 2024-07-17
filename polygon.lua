@@ -15,7 +15,7 @@ polygon.new = function()
         frameCount = 0,
         points = {},
         vertices = 3, -- number of polygon self.vertices
-        rotationSpeed = 1 / 8, -- rotation speed
+        rotationSpeed = 1 / 2, -- rotation speed
         radiusSpeed = 1 / 3,
     }
     function self.update()
@@ -46,12 +46,14 @@ polygon.new = function()
         self.frameCount += 1
         radius = map2(cos(t()*self.radiusSpeed+.5)^.5, {6,60})
         step = map(cos(t()*self.rotationSpeed+.5), {8,40})
+        colour = 16
         for r = radius, 4, -step do
+            colour -= 1
             for i = 1, #self.points do
                 local p1, p2 = self.points[i], self.points[i + 1]
                 -- connect last & first point
                 if (i == #self.points) p2 = self.points[1]
-                line(64 + r * p1.x, 64 + r * p1.y, 64 + r * p2.x,64 + r * p2.y, self.frameCount%8+8)
+                line(64 + r * p1.x, 64 + r * p1.y, 64 + r * p2.x,64 + r * p2.y, colour - self.frameCount%5)
             end
         end
    
