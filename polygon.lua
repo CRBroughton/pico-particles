@@ -9,6 +9,7 @@ function map(v,ab) return lerp(ab, v/2+.5) end
 polygon = {}
 polygon.new = function()
     local self = {
+        frameCount = 0,
         points = {},
         vertices = 3, -- number of polygon self.vertices
         rotationSpeed = 1 / 8, -- rotation speed
@@ -29,11 +30,12 @@ polygon.new = function()
 
     function self.draw()
         cls()
+        self.frameCount += 1
         for i = 1, #self.points do
             local p1, p2 = self.points[i], self.points[i + 1]
             -- connect last & first point
             if (i == #self.points) p2 = self.points[1]
-            line(p1.x, p1.y, p2.x, p2.y, 7)
+            line(p1.x, p1.y, p2.x, p2.y, self.frameCount%8+8)
         end
         color() cursor()
         print("vertices ".. self.vertices)
