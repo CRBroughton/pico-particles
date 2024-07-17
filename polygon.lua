@@ -29,22 +29,24 @@ polygon.new = function()
             --     x = 64 + random * cos(a + t() * self.rotationSpeed),
 			--     y = 64 + random * sin(a + t() * self.rotationSpeed),
             -- })
+            rotation = map(cos(t() * self.rotationSpeed+.5), {-.4,.4})
             add(self.points,{
-                x = cos(a + t() * self.rotationSpeed),
-                y = sin(a + t() * self.rotationSpeed),
+                x = cos(a + rotation * self.rotationSpeed),
+                y = sin(a + rotation * self.rotationSpeed),
             })
         end
     end
 
     function self.draw()
-        for _=1,8000 do
-            local a=0x6000+rnd(0x8000)\1
+        for _=1,4000 do
+            local a=0x6000+rnd(0x2000)\1
             poke(a, peek(a)*.01)
         end
 
         self.frameCount += 1
         radius = map2(cos(t()*self.radiusSpeed+.5)^.5, {6,60})
-        for r = radius, 4, -8 do
+        step = map(cos(t()*self.rotationSpeed+.5), {8,40})
+        for r = radius, 4, -step do
             for i = 1, #self.points do
                 local p1, p2 = self.points[i], self.points[i + 1]
                 -- connect last & first point
