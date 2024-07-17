@@ -43,12 +43,13 @@ polygon.new = function()
         end
 
         self.frameCount += 1
-        for radius = 50, 20, -8 do
+        radius = map2(cos(t()*self.radiusSpeed+.5)^.5, {6,60})
+        for r = radius, 4, -8 do
             for i = 1, #self.points do
                 local p1, p2 = self.points[i], self.points[i + 1]
                 -- connect last & first point
                 if (i == #self.points) p2 = self.points[1]
-                line(64 + radius * p1.x, 64 + radius * p1.y, 64 + radius * p2.x,64 + radius * p2.y, self.frameCount%8+8)
+                line(64 + r * p1.x, 64 + r * p1.y, 64 + r * p2.x,64 + r * p2.y, self.frameCount%8+8)
             end
         end
    
