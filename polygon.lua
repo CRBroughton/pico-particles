@@ -29,7 +29,11 @@ polygon.new = function()
     end
 
     function self.draw()
-        cls()
+        for _=1,3000 do
+            local a=0x6000+rnd(0x2000)\1
+            poke(a, peek(a)*.01)
+        end
+
         self.frameCount += 1
         for i = 1, #self.points do
             local p1, p2 = self.points[i], self.points[i + 1]
@@ -38,7 +42,8 @@ polygon.new = function()
             line(p1.x, p1.y, p2.x, p2.y, self.frameCount%8+8)
         end
         color() cursor()
-        print("vertices ".. self.vertices)
+        print("\#0vertices; "..self.vertices)
+        print("\#0rotspd "..self.rotationSpeed)
     end
 
     return self

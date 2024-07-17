@@ -18,8 +18,6 @@ function _update60()
 end
 
 function _draw()
-    cls()
-
     if count > 0 and count < 2 then
         newFlame.draw()
     end
