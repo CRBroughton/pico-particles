@@ -3,16 +3,19 @@ polygon.new = function()
     local self = {
         points = {},
         vertices = 3, -- number of polygon self.vertices
+        rotationSpeed = 1 / 8, -- rotation speed
     }
     function self.update()
         if (btnp(⬅️)) self.vertices -= 1
         if (btnp(➡️)) self.vertices += 1
         self.points = {}
 
-        for a=-1,1,1 / self.vertices do
+        for a=-1, 1, 1 / self.vertices do
             add(self.points, {
                 x = 64 + 32 * cos(a),
                 y = 64 + 32 * sin(a),
+                x = 64 + 32 * cos(a + t() * self.rotationSpeed),
+			    y = 64 + 32 * sin(a + t() * self.rotationSpeed),
             })
         end
     end
