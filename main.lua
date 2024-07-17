@@ -19,6 +19,7 @@ end
 
 function _draw()
     if count > 0 and count < 2 then
+        cls()
         newFlame.draw()
     end
 
