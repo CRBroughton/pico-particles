@@ -29,8 +29,8 @@ polygon.new = function()
     end
 
     function self.draw()
-        for _=1,3000 do
-            local a=0x6000+rnd(0x2000)\1
+        for _=1,8000 do
+            local a=0x6000+rnd(0x8000)\1
             poke(a, peek(a)*.01)
         end
 
