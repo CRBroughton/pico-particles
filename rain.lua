@@ -2,42 +2,77 @@ rain = {}
 
 rain.new = function()
     local self = {
-        particles = {}
-        
+        rainDrops = {},
+        max = 500,
     }
 
-    function self.update()
-        for i = 1, 5 do
-            add(self.particles, {
-                x = 0 + rnd(128),
-                y = 0 + rnd(4),
-                colour = 1,
-                life = 128
-            })
+    function self.drop() 
+        local x = 0 
+        local xSpeed = 0
+        local y = 0
+        local ySpeed = 0
+        local done = true
+
+        return {
+            start = function(newX, newY, newXSpeed, newYSpeed)
+                if done then
+                    x, y, xSpeed, ySpeed, done = newX, newY, newXSpeed, newYSpeed, false
+                    return true
+                end
+            end,
+
+            update = function()
+                if (done) return
+
+                x += xSpeed
+                ySpeed += 0.92
+                y += ySpeed
+
+                if y > 127 then
+                    done = true
+                end
+            end,
+
+            draw = function()
+                if (done) return
+
+
+                line(x, y, x + xSpeed, y + ySpeed, 7)
+            end
+
+            
+        }
+    end
+
+    function self.spawn()
+        for i = 1, self.max do
+            self.rainDrops[i] = self.drop()
         end
+    end
 
-        for particle in all(self.particles) do
-            particle.y += 1
-            particle.life -= 1
+    self.spawn()
 
-            if particle.life <= 0  then
-                del(self.particles, particle)
+    function self.raining()
+        local random = rnd(5)
+        for i = 1, self.max do
+            if self.rainDrops[i].start(rnd(127), -random, 0, random) then
+                return
             end
         end
     end
 
-    function self.draw()
-        cls()
-        for particle in all(self.particles) do
-            rectfill(
-                particle.x,
-                particle.y,
-                particle.x,
-                particle.y + 2,
-                particle.colour
-            )
+    function self.update()
+        for i = 1, self.max do
+            self.rainDrops[i].update()
         end
     end
 
+    function self.draw()
+        for i = 1, self.max do
+            self.rainDrops[i].draw()
+        end
+    end
+
+    
     return self
 end

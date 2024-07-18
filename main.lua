@@ -8,12 +8,12 @@ end
 function _update60()
     newFlame.update()
     polygon.update()
+    rain.raining()
     rain.update()
 
     if btnp('5') then
         count = count + 1
     end
-
 end
 
 function _draw()
