@@ -32,7 +32,16 @@ rain.new = function()
                 x += xSpeed
                 y += ySpeed
                 ySpeed += 0.1
-                xSpeed += 0.1
+
+                randomDIR = rnd()
+                if randomDIR > 0.5 then
+                    xSpeed += 0.1
+
+                end
+                if randomDIR < 0.5 then
+                    xSpeed -= 0.1
+
+                end
 
                 if y > 127 then
                     done = true
