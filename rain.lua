@@ -1,13 +1,18 @@
 rain = {}
 
+--random int between l,h
+function randb(l,h) --exclusive
+    return flr(rnd(h-l))+l
+end
+
 rain.new = function()
     local self = {
         rainDrops = {},
         max = 500,
     }
 
-    function self.drop() 
-        local x = 0 
+    function self.drop()
+        local x = 0
         local xSpeed = 0
         local y = 0
         local ySpeed = 0
@@ -28,17 +33,20 @@ rain.new = function()
                 ySpeed += 0.1
                 y += ySpeed
 
+                -- x += xSpeed
+
                 if y > 127 then
                     done = true
                 end
             end,
 
+
             draw = function()
                 if (done) return
-                line(x, y, x + xSpeed, y + ySpeed, rnd(2))
+                line(x, y, x + xSpeed, y + ySpeed, randb(0, 2))
             end
 
-            
+
         }
     end
 
