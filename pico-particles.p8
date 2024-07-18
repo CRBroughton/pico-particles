@@ -3,5 +3,5 @@ version 42
 __lua__
 #include flame.lua
 #include polygon.lua
+#include rain.lua
 #include main.lua
-__gfx__
