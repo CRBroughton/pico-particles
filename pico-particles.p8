@@ -4,4 +4,5 @@ __lua__
 #include flame.lua
 #include polygon.lua
 #include rain.lua
+#include sparks.lua
 #include main.lua

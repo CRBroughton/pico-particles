@@ -1,8 +1,13 @@
-rain = {}
+sparks = {}
 
-rain.new = function()
+--random int between l,h
+function randb(l,h) --exclusive
+    return flr(rnd(h-l))+l
+end
+
+sparks.new = function()
     local self = {
-        rainDrops = {},
+        particles = {},
         max = 500,
     }
 
@@ -25,8 +30,18 @@ rain.new = function()
                 if (done) return
 
                 x += xSpeed
-                ySpeed += 0.1
                 y += ySpeed
+                ySpeed += 0.1
+
+                randomDIR = rnd()
+                if randomDIR > 0.5 then
+                    xSpeed += 0.1
+
+                end
+                if randomDIR < 0.5 then
+                    xSpeed -= 0.1
+
+                end
 
                 if y > 127 then
                     done = true
@@ -36,41 +51,41 @@ rain.new = function()
 
             draw = function()
                 if (done) return
-                line(x, y, x + xSpeed, y + ySpeed, randb(0, 2))
+                line(x, y, x + xSpeed, y + ySpeed, randb(9, 11))
             end
 
 
         }
     end
 
-    function self.spawn()
+    function spawn()
         for i = 1, self.max do
-            self.rainDrops[i] = self.drop()
+            self.particles[i] = self.drop()
         end
     end
 
-
-    function self.raining()
+    function startSparks()
         local random = rnd(5)
         for i = 1, self.max do
-            if self.rainDrops[i].start(rnd(127), -random, 0, random) then
+            if self.particles[i].start(64, random, 0, random) then
                 return
             end
         end
     end
 
     function self.update()
+        startSparks()
         for i = 1, self.max do
-            self.rainDrops[i].update()
+            self.particles[i].update()
         end
     end
 
     function self.draw()
         for i = 1, self.max do
-            self.rainDrops[i].draw()
+            self.particles[i].draw()
         end
     end
 
-    self.spawn()
+    spawn()
     return self
 end

@@ -3,6 +3,8 @@ function _init()
     newFlame = flame.new()
     polygon = polygon.new()
     rain = rain.new()
+    sparks = sparks.new()
+    
 end
 
 function _update60()
@@ -10,6 +12,7 @@ function _update60()
     polygon.update()
     rain.raining()
     rain.update()
+    sparks.update()
 
     if btnp('5') then
         count = count + 1
@@ -31,7 +34,12 @@ function _draw()
         rain.draw()
     end
 
-    if count > 2 then
+    if count == 3 then
+        cls()
+        sparks.draw()
+    end
+
+    if count > 3 then
         count = 0
     end
 end
