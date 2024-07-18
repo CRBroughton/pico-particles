@@ -30,10 +30,9 @@ rain.new = function()
                 if (done) return
 
                 x += xSpeed
-                ySpeed += 0.1
                 y += ySpeed
-
-                -- x += xSpeed
+                ySpeed += 0.1
+                xSpeed += 0.1
 
                 if y > 127 then
                     done = true
@@ -43,7 +42,7 @@ rain.new = function()
 
             draw = function()
                 if (done) return
-                line(x, y, x + xSpeed, y + ySpeed, randb(0, 2))
+                line(x, y, x + xSpeed, y + ySpeed, randb(9, 11))
             end
 
 
@@ -60,7 +59,7 @@ rain.new = function()
     function self.raining()
         local random = rnd(5)
         for i = 1, self.max do
-            if self.rainDrops[i].start(rnd(127), -random, 0, random) then
+            if self.rainDrops[i].start(64, random, 0, random) then
                 return
             end
         end
