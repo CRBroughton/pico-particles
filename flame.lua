@@ -34,8 +34,12 @@ flame.new = function()
             particle.radius -= 0.1
             particle.life -= 1
     
-            if particle.life < 5 then
+            if particle.life < 20 then
                 particle.colour = 9
+            end
+
+            if particle.life < 10 then
+                particle.colour = 2
             end
     
             if particle.life < 0 then
