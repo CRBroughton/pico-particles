@@ -5,4 +5,5 @@ __lua__
 #include polygon.lua
 #include rain.lua
 #include sparks.lua
+#include fireworks.lua
 #include main.lua
